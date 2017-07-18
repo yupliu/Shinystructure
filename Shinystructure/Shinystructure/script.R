@@ -23,4 +23,5 @@ if (!require("ggplot2", quietly = TRUE))
 library(ggplot2)
 
 #load sdf
+sdf_name <- ""
 
