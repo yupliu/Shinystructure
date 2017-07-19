@@ -27,12 +27,12 @@ sdf_name <- "D:\\ChemData\\DBF_all_compounds.sdf"
 activity_col <- "L2 ECHCG WB2-POST PHYTO 4 kg/ha"
 mols <- load.molecules(sdf_name)
 #copy activity column in to activity
-activity_list <- list()
-smiles_list <- list()
+activity_ar <- c()
+smiles_ar <- c()
 for(mol in mols){
     set.property(mol, 'activity', get.property(mol, activity_col))
-    append(activity_list, get.property(mol, activity_col))
-    append(smiles_list, get.smiles(mol,type = 'unique'))
+    activity_ar <- append(activity_ar, get.property(mol, activity_col))
+    smiles_ar <- append(smiles_ar, get.smiles(mol, type = 'unique'))
 }
 #view.molecule.2d(mols)
 
@@ -60,3 +60,7 @@ y <- fit$points[, 2]
 plot(x, y, xlab = "Coordinate 1", ylab = "Coordinate 2",
   main = "MDS")
 
+#build data frame
+dt_fram <- data.frame(x, y, activity_ar, smiles_ar)
+
+# plot 2D contour
